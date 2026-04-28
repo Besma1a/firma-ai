@@ -1,8 +1,6 @@
 # NABTA AI  Multilingual RAG Service
 
-The AI core for the NABTA agronomic assistant. Wraps the 10 Algerian crop
-fact sheets in a multilingual semantic search and a GROK-powered chatbot.
-
+The AI core for the NABTA agronomic assistant.
 
 
 ---
