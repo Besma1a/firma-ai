@@ -1,10 +1,9 @@
-# NABTA AI — Multilingual RAG Service
+# NABTA AI  Multilingual RAG Service
 
 The AI core for the NABTA agronomic assistant. Wraps the 10 Algerian crop
-fact sheets in a multilingual semantic search and a Claude-powered chatbot.
+fact sheets in a multilingual semantic search and a GROK-powered chatbot.
 
-This service is **only** the AI side: chat + RAG. Disease diagnosis (CV),
-weather alerts, and PDF reports are separate modules to be added later.
+
 
 ---
 
@@ -12,7 +11,7 @@ weather alerts, and PDF reports are separate modules to be added later.
 
 ```
 nabta-ai/
-├── README.md                       ← you are here
+├── README.md                       
 ├── requirements.txt
 ├── .env.example
 ├── .gitignore
@@ -41,43 +40,7 @@ nabta-ai/
 
 ---
 
-## Architecture in 30 seconds
 
-```
-                        ┌──────────────────────────────┐
-                        │  Frontend (React / Flutter)  │
-                        └──────────────┬───────────────┘
-                                       │ HTTPS
-                          POST /chat   │   POST /chat/stream
-                                       ▼
-┌──────────────────────────────────────────────────────────────────┐
-│ FastAPI (app/main.py)                                            │
-│  └─ /chat router (app/routers/chat.py)                           │
-│      └─ rag.answer() / rag.answer_stream() (app/services/rag.py) │
-│          ├─ vectorstore.search()  → top-k crop chunks            │
-│          └─ claude_client.complete() / .stream()                 │
-└──────────────────────────────────────────────────────────────────┘
-                  │                                │
-                  ▼                                ▼
-         ┌──────────────────┐               ┌─────────────┐
-         │ Chroma local DB  │               │  Anthropic  │
-         │ (./chroma_db/)   │               │  Claude API │
-         │ + multilingual   │               └─────────────┘
-         │   embeddings     │
-         └──────────────────┘
-                  ▲
-                  │ built once by scripts/
-         ┌────────┴─────────┐
-         │ markdown chunks  │
-         │ (app/data/kb/)   │
-         └────────┬─────────┘
-                  │
-         ┌────────┴─────────┐
-         │ crops seed JSON  │
-         └──────────────────┘
-```
-
----
 
 ## Quickstart — 6 commands to a working chatbot
 
@@ -108,12 +71,11 @@ python scripts/smoke_test.py
 uvicorn app.main:app --reload --port 8000
 #   → open http://localhost:8000/docs
 ```
-
-That's it. Your frontend can now POST to `http://localhost:8000/chat`.
+frontend can now POST to `http://localhost:8000/chat`.
 
 ---
 
-## Step by step — what each piece actually does
+
 
 ### Step 1 — `scripts/build_kb.py` (runs `app/services/kb_builder.py`)
 
@@ -208,9 +170,7 @@ FastAPI bootstrap. Three things to notice:
 
 ---
 
-## API reference
 
-### `POST /chat`
 
 Request:
 ```json
@@ -263,17 +223,6 @@ data: [DONE]
 
 ---
 
-## Mock mode (your hackathon insurance)
-
-Set `MOCK_CLAUDE=true` in `.env` and Claude is never called. The service
-still does retrieval and returns a stub answer in the user's language. Use it:
-
-- While your frontend teammates integrate before you have an API key
-- During flaky hotel Wi-Fi at the venue
-- As a fallback if Claude rate-limits during the live demo
-
----
-
 ## Deployment
 
 ### Local Docker
@@ -282,42 +231,9 @@ still does retrieval and returns a stub answer in the user's language. Use it:
 docker build -t nabta-ai .
 docker run -p 8000:8000 --env-file .env nabta-ai
 ```
-
-The Dockerfile pre-downloads the embedding model and pre-builds the KB and
-vector store at image-build time, so the container starts in ~3 seconds.
-
-### Render / Railway / Fly.io
-
-Push the repo, set `ANTHROPIC_API_KEY` in the dashboard, point at the
-Dockerfile. You'll have a public URL in 5 minutes.
-
 ---
 
-## Troubleshooting
-
-**`ModuleNotFoundError: app.services...`**  
-Run scripts from the project root, not from inside `scripts/`.
-
-**Smoke test returns weird scores like 1.5**  
-Chroma uses distance, not similarity, depending on your version. What matters
-is *relative* ranking, not the absolute number. A tomato question whose top
-result is `tomato/...` is correct regardless of the score's magnitude.
-
-**First call to `/chat` is slow**  
-Run `/healthz` once after starting the server. The lifespan hook should
-pre-load the model, but a manual ping guarantees it.
-
-**Claude responds in MSA when I asked in Darija**  
-Add the failing Darija phrase as a few-shot example in `SYSTEM_PROMPT_TEMPLATE`
-inside `app/services/rag.py`.
-
-**Vector store is empty (`chunks_indexed: 0`)**  
-You probably haven't run `scripts/build_vectorstore.py` yet, or you ran it
-in a different working directory. Check `settings.vector_store_dir`.
-
----
-
-## What to wire next (after this works)
+##= (after this works)
 
 This module is intentionally limited to chat + RAG. The full NABTA backend
 needs four more services. Each one slots in next to `app/services/rag.py`:
@@ -327,6 +243,4 @@ needs four more services. Each one slots in next to `app/services/rag.py`:
 3. `app/services/pdf_report.py` — ReportLab weekly summary
 4. `app/services/firestore.py` — Firebase admin wrapper for journal/diagnoses
 
-Ask your AI mentor (me) for the disease seed JSON next — it's the missing
-half of the chatbot's knowledge: when a farmer asks about a disease, the
-chatbot should be able to give a treatment, not just identify it.
+
