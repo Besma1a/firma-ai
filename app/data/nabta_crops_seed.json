@@ -1,0 +1,520 @@
+{
+  "_meta": {
+    "version": "1.0.0",
+    "schema": "nabta.crops.v1",
+    "generated_for": "BioVatech Innovation Days - Axis 1 - NABTA",
+    "country": "DZ",
+    "country_name": "Algeria",
+    "languages_supported": ["ar", "fr", "en", "darija"],
+    "firestore_collection": "crops",
+    "doc_id_field": "id",
+    "notes": "Yields and water needs are realistic ranges for Algerian conditions (rainfed vs irrigated). Disease lists are ordered by prevalence. Use this file as a one-shot Firestore import: each top-level key under `crops` becomes a document.",
+    "import_hint": "for cid, doc in data['crops'].items(): db.collection('crops').document(cid).set(doc)"
+  },
+  "crops": {
+    "wheat": {
+      "id": "wheat",
+      "category": "cereal",
+      "icon": "wheat",
+      "names": {
+        "en": "Wheat",
+        "fr": "Blé",
+        "ar": "قمح",
+        "darija": "Gemḥ"
+      },
+      "scientific_name": "Triticum aestivum / Triticum durum",
+      "varieties_dz": ["Boussalem (durum)", "Waha (durum)", "Vitron", "HD1220", "Mexicali"],
+      "main_regions_dz": ["Sétif", "Constantine", "Tiaret", "Sidi Bel Abbès", "Guelma", "Souk Ahras", "Mila"],
+      "planting_calendar": {
+        "sowing_window_north": "October - December",
+        "sowing_window_high_plateaus": "November - January",
+        "harvest_window": "May - July",
+        "growing_cycle_days": 180,
+        "monthly_calendar": {
+          "Jan": "tillering / vegetative", "Feb": "tillering",
+          "Mar": "stem elongation", "Apr": "heading / flowering",
+          "May": "grain filling / harvest (south)", "Jun": "harvest (north)",
+          "Jul": "harvest (high plateaus)", "Aug": "post-harvest",
+          "Sep": "soil preparation", "Oct": "sowing (main)",
+          "Nov": "sowing / emergence", "Dec": "tillering"
+        }
+      },
+      "water_requirements": {
+        "total_mm_per_cycle": "450-650",
+        "regime": "rainfed_with_supplemental_irrigation",
+        "critical_stages": ["tillering", "heading", "grain filling"],
+        "irrigation_advice_fr": "Irrigation d'appoint de 50-100 mm au tallage et 80-120 mm à la montaison si la pluviométrie est inférieure à 350 mm.",
+        "irrigation_advice_ar": "ري تكميلي 50-100 مم في مرحلة الإشطاء و80-120 مم عند الإسبال إذا كانت الأمطار أقل من 350 مم."
+      },
+      "average_yield": {
+        "rainfed_q_per_ha": "12-20",
+        "irrigated_q_per_ha": "35-50",
+        "national_average_q_per_ha": 17,
+        "unit": "quintals_per_hectare"
+      },
+      "common_diseases": [
+        { "id": "septoria_tritici", "name_fr": "Septoriose", "name_ar": "السبتوريا", "severity": "high", "season": "spring" },
+        { "id": "yellow_rust", "name_fr": "Rouille jaune", "name_ar": "الصدأ الأصفر", "severity": "high", "season": "spring" },
+        { "id": "brown_rust", "name_fr": "Rouille brune", "name_ar": "الصدأ البني", "severity": "medium", "season": "late_spring" },
+        { "id": "fusarium_head_blight", "name_fr": "Fusariose de l'épi", "name_ar": "الفيوزاريوم", "severity": "medium", "season": "flowering" },
+        { "id": "hessian_fly", "name_fr": "Cécidomyie (mouche de Hesse)", "name_ar": "ذبابة هسي", "severity": "medium", "season": "autumn" }
+      ],
+      "soil": { "ph_range": "6.0-7.5", "texture": "loamy_clay" },
+      "fertilization_npk_kg_per_ha": { "N": 100, "P": 60, "K": 40 }
+    },
+
+    "tomato": {
+      "id": "tomato",
+      "category": "vegetable",
+      "icon": "tomato",
+      "names": {
+        "en": "Tomato",
+        "fr": "Tomate",
+        "ar": "طماطم",
+        "darija": "Ṭamaṭem / Maticha"
+      },
+      "scientific_name": "Solanum lycopersicum",
+      "varieties_dz": ["Rio Grande", "Saint-Pierre", "Heinz", "Marmande", "Cherry hybrides"],
+      "main_regions_dz": ["Biskra (sous serre)", "El Oued", "Mostaganem", "Skikda", "Annaba", "Tipaza"],
+      "planting_calendar": {
+        "open_field_transplant": "February - May",
+        "greenhouse_biskra_eloued": "September - April",
+        "harvest_window": "May - October (open field), year-round (serre)",
+        "growing_cycle_days": 110,
+        "monthly_calendar": {
+          "Jan": "greenhouse production (south)", "Feb": "nursery + transplant (north)",
+          "Mar": "transplant + flowering (serre)", "Apr": "flowering (open field)",
+          "May": "harvest start (south)", "Jun": "harvest (north)",
+          "Jul": "peak harvest", "Aug": "harvest end", "Sep": "greenhouse planting (south)",
+          "Oct": "vegetative growth (serre)", "Nov": "flowering (serre)", "Dec": "harvest (serre)"
+        }
+      },
+      "water_requirements": {
+        "total_mm_per_cycle": "400-600",
+        "regime": "drip_irrigation_recommended",
+        "critical_stages": ["flowering", "fruit set", "fruit development"],
+        "irrigation_advice_fr": "Goutte-à-goutte: 4-6 mm/jour en pleine production. Stress hydrique = nécrose apicale (cul noir).",
+        "irrigation_advice_ar": "ري بالتنقيط: 4-6 مم يوميا في الإنتاج. نقص الماء يسبب تعفن نهاية الثمرة."
+      },
+      "average_yield": {
+        "open_field_t_per_ha": "35-50",
+        "greenhouse_t_per_ha": "100-150",
+        "national_average_t_per_ha": 60,
+        "unit": "tonnes_per_hectare"
+      },
+      "common_diseases": [
+        { "id": "late_blight", "name_fr": "Mildiou", "name_ar": "الندوة المتأخرة", "severity": "high", "season": "humid_periods" },
+        { "id": "early_blight", "name_fr": "Alternariose", "name_ar": "التبقع المبكر", "severity": "high", "season": "warm_humid" },
+        { "id": "tylcv", "name_fr": "Virus TYLCV (feuilles jaunes en cuillère)", "name_ar": "فيروس TYLCV", "severity": "high", "season": "summer" },
+        { "id": "fusarium_wilt", "name_fr": "Flétrissement fusarien", "name_ar": "ذبول الفيوزاريوم", "severity": "medium", "season": "warm_soil" },
+        { "id": "blossom_end_rot", "name_fr": "Cul noir (carence Ca)", "name_ar": "تعفن نهاية الثمرة", "severity": "medium", "season": "all" }
+      ],
+      "soil": { "ph_range": "6.0-6.8", "texture": "well_drained_sandy_loam" },
+      "fertilization_npk_kg_per_ha": { "N": 180, "P": 100, "K": 250 }
+    },
+
+    "olive": {
+      "id": "olive",
+      "category": "tree_crop",
+      "icon": "olive-branch",
+      "names": {
+        "en": "Olive",
+        "fr": "Olivier",
+        "ar": "زيتون",
+        "darija": "Zitūn"
+      },
+      "scientific_name": "Olea europaea",
+      "varieties_dz": ["Chemlal", "Sigoise", "Azeradj", "Limli", "Bouchouk", "Ferkani"],
+      "main_regions_dz": ["Tizi Ouzou", "Béjaïa", "Bouira", "Mascara", "Sidi Bel Abbès", "Tlemcen", "Jijel"],
+      "planting_calendar": {
+        "tree_planting_window": "November - March (dormancy)",
+        "flowering": "April - May",
+        "fruit_set": "May - June",
+        "harvest_window": "October - January",
+        "monthly_calendar": {
+          "Jan": "dormant pruning + harvest end", "Feb": "pruning + planting",
+          "Mar": "planting + bud break", "Apr": "flowering",
+          "May": "fruit set", "Jun": "pit hardening",
+          "Jul": "fruit growth (irrigation critique)", "Aug": "fruit growth",
+          "Sep": "oil accumulation", "Oct": "harvest start (table olives)",
+          "Nov": "harvest oil olives", "Dec": "harvest peak"
+        }
+      },
+      "water_requirements": {
+        "total_mm_per_cycle": "400-600",
+        "regime": "rainfed_or_supplemental",
+        "critical_stages": ["flowering", "pit hardening", "oil accumulation"],
+        "irrigation_advice_fr": "Très tolérant à la sécheresse. Irrigation d'appoint de juin à septembre double le rendement.",
+        "irrigation_advice_ar": "شجرة الزيتون مقاومة للجفاف لكن الري التكميلي من جوان إلى سبتمبر يضاعف الإنتاج."
+      },
+      "average_yield": {
+        "rainfed_t_per_ha": "1.5-2.5",
+        "irrigated_t_per_ha": "4-6",
+        "national_average_kg_per_tree": 18,
+        "alternate_bearing": true,
+        "unit": "tonnes_per_hectare"
+      },
+      "common_diseases": [
+        { "id": "peacock_spot", "name_fr": "Œil de paon", "name_ar": "عين الطاووس", "severity": "high", "season": "winter_spring" },
+        { "id": "olive_fly", "name_fr": "Mouche de l'olive", "name_ar": "ذبابة الزيتون", "severity": "high", "season": "summer_autumn" },
+        { "id": "olive_knot", "name_fr": "Tuberculose / gale", "name_ar": "السل الزيتوني", "severity": "medium", "season": "wet_season" },
+        { "id": "verticillium_wilt", "name_fr": "Verticilliose", "name_ar": "الذبول الفرتيسيلي", "severity": "high", "season": "all" },
+        { "id": "anthracnose", "name_fr": "Anthracnose (lèpre)", "name_ar": "الأنثراكنوز", "severity": "medium", "season": "harvest" }
+      ],
+      "soil": { "ph_range": "6.5-8.5", "texture": "tolerates_calcareous_rocky" },
+      "fertilization_npk_kg_per_ha": { "N": 80, "P": 40, "K": 120 }
+    },
+
+    "date_palm": {
+      "id": "date_palm",
+      "category": "tree_crop",
+      "icon": "palm-tree",
+      "names": {
+        "en": "Date Palm",
+        "fr": "Palmier dattier",
+        "ar": "نخيل التمر",
+        "darija": "Naḫla"
+      },
+      "scientific_name": "Phoenix dactylifera",
+      "varieties_dz": ["Deglet Nour", "Ghars", "Mech Degla", "Degla Beida", "Tafezouine"],
+      "main_regions_dz": ["Biskra", "El Oued", "Ouargla", "Adrar", "Ghardaïa", "Tamanrasset"],
+      "planting_calendar": {
+        "offshoot_planting_window": "February - April or September - October",
+        "pollination": "February - March",
+        "harvest_window": "September - December",
+        "monthly_calendar": {
+          "Jan": "winter dormancy + irrigation min", "Feb": "pollination + planting",
+          "Mar": "pollination + planting", "Apr": "fruit set (kimri)",
+          "May": "fruit growth (kimri green)", "Jun": "fruit growth (khalal)",
+          "Jul": "khalal stage + bagging", "Aug": "rutab stage",
+          "Sep": "harvest start (Ghars)", "Oct": "harvest peak",
+          "Nov": "harvest Deglet Nour", "Dec": "harvest end + cleaning"
+        }
+      },
+      "water_requirements": {
+        "annual_m3_per_ha": "15000-20000",
+        "regime": "flood_or_drip_irrigation",
+        "critical_stages": ["pollination", "fruit set", "fruit growth"],
+        "salt_tolerance": "high",
+        "irrigation_advice_fr": "Tolère eau saumâtre jusqu'à 6 dS/m. Goutte-à-goutte économise 40-50% d'eau.",
+        "irrigation_advice_ar": "يتحمل الماء المالح حتى 6 dS/m. الري بالتنقيط يوفر 40-50% من الماء."
+      },
+      "average_yield": {
+        "kg_per_tree": "50-100",
+        "t_per_ha": "5-8",
+        "trees_per_ha": 100,
+        "unit": "tonnes_per_hectare"
+      },
+      "common_diseases": [
+        { "id": "bayoud", "name_fr": "Bayoud (Fusariose vasculaire)", "name_ar": "البيوض", "severity": "critical", "season": "all", "note": "Maladie #1 du palmier en Algérie" },
+        { "id": "red_palm_weevil", "name_fr": "Charançon rouge", "name_ar": "سوسة النخيل الحمراء", "severity": "critical", "season": "all" },
+        { "id": "brown_spot", "name_fr": "Maladie des taches brunes", "name_ar": "التبقع البني", "severity": "medium", "season": "wet" },
+        { "id": "khamedj", "name_fr": "Khamedj (inflorescence)", "name_ar": "الخامج", "severity": "medium", "season": "spring" },
+        { "id": "boufaroua_mite", "name_fr": "Boufaroua (acarien)", "name_ar": "بوفروة", "severity": "high", "season": "summer" }
+      ],
+      "soil": { "ph_range": "7.0-8.5", "texture": "sandy_well_drained" },
+      "fertilization_npk_kg_per_tree": { "N": 1.5, "P": 0.5, "K": 2.0 }
+    },
+
+    "potato": {
+      "id": "potato",
+      "category": "vegetable",
+      "icon": "potato",
+      "names": {
+        "en": "Potato",
+        "fr": "Pomme de terre",
+        "ar": "بطاطا",
+        "darija": "Baṭaṭa"
+      },
+      "scientific_name": "Solanum tuberosum",
+      "varieties_dz": ["Spunta", "Désirée", "Fabula", "Bartina", "Kondor"],
+      "main_regions_dz": ["El Oued", "Mostaganem", "Aïn Defla", "Mascara", "Skikda", "Bouira"],
+      "planting_calendar": {
+        "season_arriere_saison": "August - September (harvest Nov-Dec)",
+        "season_saison": "February - March (harvest May-Jun)",
+        "season_primeur_coastal": "November - December (harvest Mar-Apr)",
+        "growing_cycle_days": 100,
+        "monthly_calendar": {
+          "Jan": "primeur growth", "Feb": "saison planting", "Mar": "primeur harvest + saison growth",
+          "Apr": "saison flowering", "May": "saison harvest", "Jun": "saison harvest end",
+          "Jul": "soil preparation", "Aug": "arrière-saison planting", "Sep": "arrière-saison growth",
+          "Oct": "tuber bulking", "Nov": "arrière-saison harvest + primeur planting",
+          "Dec": "arrière-saison harvest end"
+        }
+      },
+      "water_requirements": {
+        "total_mm_per_cycle": "400-600",
+        "regime": "sprinkler_or_drip",
+        "critical_stages": ["tuber initiation", "tuber bulking"],
+        "irrigation_advice_fr": "Irriguer tous les 4-7 jours. Stress en tubérisation = pertes de 30-50%.",
+        "irrigation_advice_ar": "الري كل 4-7 أيام. الإجهاد المائي عند التدرنة يسبب خسائر 30-50%."
+      },
+      "average_yield": {
+        "t_per_ha": "25-35",
+        "irrigated_optimum_t_per_ha": "40-50",
+        "national_average_t_per_ha": 30,
+        "unit": "tonnes_per_hectare"
+      },
+      "common_diseases": [
+        { "id": "late_blight", "name_fr": "Mildiou", "name_ar": "الندوة المتأخرة", "severity": "critical", "season": "humid_cool" },
+        { "id": "early_blight", "name_fr": "Alternariose", "name_ar": "التبقع المبكر", "severity": "high", "season": "warm" },
+        { "id": "potato_virus_y", "name_fr": "Virus Y (PVY)", "name_ar": "فيروس PVY", "severity": "high", "season": "all" },
+        { "id": "colorado_beetle", "name_fr": "Doryphore", "name_ar": "خنفساء كولورادو", "severity": "medium", "season": "spring_summer" },
+        { "id": "blackleg", "name_fr": "Jambe noire (Pectobacterium)", "name_ar": "الساق السوداء", "severity": "medium", "season": "wet" }
+      ],
+      "soil": { "ph_range": "5.5-6.5", "texture": "sandy_loam_well_drained" },
+      "fertilization_npk_kg_per_ha": { "N": 150, "P": 80, "K": 200 }
+    },
+
+    "onion": {
+      "id": "onion",
+      "category": "vegetable",
+      "icon": "onion",
+      "names": {
+        "en": "Onion",
+        "fr": "Oignon",
+        "ar": "بصل",
+        "darija": "Bṣel"
+      },
+      "scientific_name": "Allium cepa",
+      "varieties_dz": ["Rouge de Tafraout", "Blanc hâtif de Paris", "Texas Early Grano", "Valenciana"],
+      "main_regions_dz": ["El Oued", "Aïn Defla", "Mostaganem", "Bouira", "Tipaza"],
+      "planting_calendar": {
+        "nursery_window": "September - October",
+        "transplant_window": "December - February",
+        "direct_sow_window": "February - March",
+        "harvest_window": "May - August",
+        "growing_cycle_days": 150,
+        "monthly_calendar": {
+          "Jan": "transplant + bulb formation", "Feb": "transplant late + direct sow",
+          "Mar": "vegetative growth", "Apr": "bulb initiation", "May": "early harvest (primeur)",
+          "Jun": "main harvest", "Jul": "harvest + curing", "Aug": "storage",
+          "Sep": "nursery start", "Oct": "nursery", "Nov": "nursery + soil prep",
+          "Dec": "transplant start"
+        }
+      },
+      "water_requirements": {
+        "total_mm_per_cycle": "350-550",
+        "regime": "frequent_light_irrigation",
+        "critical_stages": ["bulb initiation", "bulb development"],
+        "irrigation_advice_fr": "Arrêter l'irrigation 2 semaines avant récolte pour favoriser la conservation.",
+        "irrigation_advice_ar": "إيقاف الري قبل الحصاد بأسبوعين لتحسين التخزين."
+      },
+      "average_yield": {
+        "t_per_ha": "25-35",
+        "national_average_t_per_ha": 30,
+        "unit": "tonnes_per_hectare"
+      },
+      "common_diseases": [
+        { "id": "downy_mildew", "name_fr": "Mildiou", "name_ar": "البياض الزغبي", "severity": "high", "season": "spring" },
+        { "id": "purple_blotch", "name_fr": "Tache pourpre", "name_ar": "التبقع الأرجواني", "severity": "medium", "season": "warm_humid" },
+        { "id": "fusarium_basal_rot", "name_fr": "Pourriture basale fusarienne", "name_ar": "تعفن القاعدة", "severity": "medium", "season": "all" },
+        { "id": "thrips", "name_fr": "Thrips", "name_ar": "التربس", "severity": "high", "season": "summer" },
+        { "id": "white_rot", "name_fr": "Pourriture blanche", "name_ar": "العفن الأبيض", "severity": "high", "season": "cool_wet" }
+      ],
+      "soil": { "ph_range": "6.0-7.0", "texture": "sandy_loam" },
+      "fertilization_npk_kg_per_ha": { "N": 100, "P": 60, "K": 120 }
+    },
+
+    "pepper": {
+      "id": "pepper",
+      "category": "vegetable",
+      "icon": "pepper",
+      "names": {
+        "en": "Pepper",
+        "fr": "Poivron / Piment",
+        "ar": "فلفل",
+        "darija": "Felfla"
+      },
+      "scientific_name": "Capsicum annuum",
+      "varieties_dz": ["Lamuyo", "Yolo Wonder", "Anaheim", "Califha", "Piment d'Espelette local"],
+      "main_regions_dz": ["Biskra", "El Oued", "Tipaza", "Mostaganem", "Skikda"],
+      "planting_calendar": {
+        "nursery_window": "January - February",
+        "transplant_window": "March - May",
+        "harvest_window": "June - October (open field)",
+        "greenhouse_year_round": true,
+        "growing_cycle_days": 120,
+        "monthly_calendar": {
+          "Jan": "nursery sowing", "Feb": "nursery", "Mar": "transplant (south)",
+          "Apr": "transplant (north)", "May": "vegetative + flowering",
+          "Jun": "first harvest (south)", "Jul": "peak harvest",
+          "Aug": "harvest", "Sep": "harvest + late flowering", "Oct": "harvest end",
+          "Nov": "soil prep", "Dec": "soil prep + nursery"
+        }
+      },
+      "water_requirements": {
+        "total_mm_per_cycle": "600-900",
+        "regime": "drip_irrigation",
+        "critical_stages": ["flowering", "fruit set", "fruit development"],
+        "irrigation_advice_fr": "Très sensible au stress hydrique - chute des fleurs.",
+        "irrigation_advice_ar": "حساس جدا للإجهاد المائي - يسبب سقوط الأزهار."
+      },
+      "average_yield": {
+        "open_field_t_per_ha": "25-40",
+        "greenhouse_t_per_ha": "60-100",
+        "national_average_t_per_ha": 35,
+        "unit": "tonnes_per_hectare"
+      },
+      "common_diseases": [
+        { "id": "phytophthora_capsici", "name_fr": "Pourriture à Phytophthora", "name_ar": "تعفن الفيتوفتورا", "severity": "high", "season": "wet_warm" },
+        { "id": "anthracnose", "name_fr": "Anthracnose", "name_ar": "الأنثراكنوز", "severity": "medium", "season": "harvest" },
+        { "id": "tswv", "name_fr": "Virus de la maladie bronzée (TSWV)", "name_ar": "فيروس TSWV", "severity": "high", "season": "summer" },
+        { "id": "bacterial_spot", "name_fr": "Tache bactérienne", "name_ar": "التبقع البكتيري", "severity": "medium", "season": "warm_humid" },
+        { "id": "aphids", "name_fr": "Pucerons", "name_ar": "المن", "severity": "medium", "season": "spring_summer" }
+      ],
+      "soil": { "ph_range": "6.0-6.8", "texture": "well_drained_loam" },
+      "fertilization_npk_kg_per_ha": { "N": 150, "P": 100, "K": 200 }
+    },
+
+    "watermelon": {
+      "id": "watermelon",
+      "category": "vegetable",
+      "icon": "watermelon",
+      "names": {
+        "en": "Watermelon",
+        "fr": "Pastèque",
+        "ar": "بطيخ / دلاع",
+        "darija": "Dellaɛ"
+      },
+      "scientific_name": "Citrullus lanatus",
+      "varieties_dz": ["Crimson Sweet", "Sugar Baby", "Charleston Gray", "Giza"],
+      "main_regions_dz": ["El Oued", "Biskra", "Aïn Defla", "Mostaganem", "Tiaret"],
+      "planting_calendar": {
+        "nursery_window": "January - February (sous serre)",
+        "transplant_window": "March - May",
+        "harvest_window": "May - September",
+        "growing_cycle_days": 100,
+        "monthly_calendar": {
+          "Jan": "nursery (south)", "Feb": "nursery + greenhouse transplant",
+          "Mar": "transplant (south)", "Apr": "transplant (north)",
+          "May": "vegetative + first harvest (south)", "Jun": "harvest peak (south)",
+          "Jul": "harvest peak (north)", "Aug": "harvest end", "Sep": "late harvest",
+          "Oct": "soil prep", "Nov": "soil prep", "Dec": "nursery prep"
+        }
+      },
+      "water_requirements": {
+        "total_mm_per_cycle": "400-600",
+        "regime": "drip_or_furrow",
+        "critical_stages": ["flowering", "fruit set", "fruit growth"],
+        "irrigation_advice_fr": "Réduire l'irrigation 1 semaine avant récolte pour augmenter le sucre (Brix).",
+        "irrigation_advice_ar": "تقليل الري قبل الحصاد بأسبوع لزيادة السكر."
+      },
+      "average_yield": {
+        "t_per_ha": "30-50",
+        "national_average_t_per_ha": 40,
+        "unit": "tonnes_per_hectare"
+      },
+      "common_diseases": [
+        { "id": "fusarium_wilt", "name_fr": "Flétrissement fusarien", "name_ar": "ذبول الفيوزاريوم", "severity": "high", "season": "warm" },
+        { "id": "anthracnose", "name_fr": "Anthracnose", "name_ar": "الأنثراكنوز", "severity": "medium", "season": "humid" },
+        { "id": "powdery_mildew", "name_fr": "Oïdium", "name_ar": "البياض الدقيقي", "severity": "high", "season": "warm_dry" },
+        { "id": "gummy_stem_blight", "name_fr": "Chancre gommeux", "name_ar": "تقرح الساق", "severity": "medium", "season": "humid" },
+        { "id": "aphids", "name_fr": "Pucerons (vecteurs viraux)", "name_ar": "المن", "severity": "medium", "season": "spring" }
+      ],
+      "soil": { "ph_range": "6.0-7.0", "texture": "sandy_well_drained" },
+      "fertilization_npk_kg_per_ha": { "N": 100, "P": 80, "K": 150 }
+    },
+
+    "citrus": {
+      "id": "citrus",
+      "category": "tree_crop",
+      "icon": "citrus",
+      "names": {
+        "en": "Citrus (Orange/Lemon/Clementine)",
+        "fr": "Agrumes (Oranger / Citronnier / Clémentinier)",
+        "ar": "حمضيات",
+        "darija": "Tchina / Limoun"
+      },
+      "scientific_name": "Citrus sinensis / C. limon / C. clementina",
+      "varieties_dz": ["Thomson Navel", "Washington Navel", "Valencia Late", "Clémentine de Boufarik", "Eureka (citron)"],
+      "main_regions_dz": ["Blida (Mitidja)", "Boumerdès", "Tipaza", "Skikda", "Mostaganem", "Chlef"],
+      "planting_calendar": {
+        "tree_planting_window": "February - April or October - November",
+        "flowering": "March - April",
+        "fruit_set": "April - May",
+        "harvest_window_orange": "November - April",
+        "harvest_window_clementine": "October - January",
+        "harvest_window_lemon": "year-round (peak Oct-Mar)",
+        "monthly_calendar": {
+          "Jan": "harvest peak orange", "Feb": "harvest + planting",
+          "Mar": "flowering + fertilization", "Apr": "fruit set",
+          "May": "June drop", "Jun": "fruit growth (irrigation critique)",
+          "Jul": "fruit growth", "Aug": "fruit growth", "Sep": "color break",
+          "Oct": "clementine harvest start", "Nov": "harvest + planting", "Dec": "harvest peak"
+        }
+      },
+      "water_requirements": {
+        "total_mm_per_cycle": "800-1200",
+        "regime": "drip_or_microsprinkler",
+        "critical_stages": ["flowering", "fruit set", "fruit growth"],
+        "irrigation_advice_fr": "Irriguer toutes les 7-10 jours en été. Sensible au stress et au sel.",
+        "irrigation_advice_ar": "الري كل 7-10 أيام في الصيف. حساس للجفاف والملوحة."
+      },
+      "average_yield": {
+        "t_per_ha": "15-25",
+        "kg_per_tree": "80-150",
+        "national_average_t_per_ha": 20,
+        "unit": "tonnes_per_hectare"
+      },
+      "common_diseases": [
+        { "id": "tristeza_virus", "name_fr": "Tristeza (CTV)", "name_ar": "فيروس التريستيزا", "severity": "critical", "season": "all" },
+        { "id": "mal_secco", "name_fr": "Mal secco", "name_ar": "الجفاف الفطري", "severity": "high", "season": "winter_spring" },
+        { "id": "brown_rot", "name_fr": "Pourriture brune (Phytophthora)", "name_ar": "التعفن البني", "severity": "high", "season": "wet" },
+        { "id": "med_fruit_fly", "name_fr": "Mouche méditerranéenne (Ceratitis)", "name_ar": "ذبابة الفاكهة المتوسطية", "severity": "high", "season": "summer_autumn" },
+        { "id": "citrus_canker", "name_fr": "Chancre citrique", "name_ar": "التقرح الحمضي", "severity": "medium", "season": "warm_wet" }
+      ],
+      "soil": { "ph_range": "6.0-7.5", "texture": "deep_well_drained" },
+      "fertilization_npk_kg_per_ha": { "N": 200, "P": 80, "K": 250 }
+    },
+
+    "barley": {
+      "id": "barley",
+      "category": "cereal",
+      "icon": "barley",
+      "names": {
+        "en": "Barley",
+        "fr": "Orge",
+        "ar": "شعير",
+        "darija": "Šɛir"
+      },
+      "scientific_name": "Hordeum vulgare",
+      "varieties_dz": ["Saïda 183", "Tichedrett", "Rihane-03", "Express"],
+      "main_regions_dz": ["Tiaret", "Sétif", "Djelfa", "M'Sila", "Saïda", "Bordj Bou Arréridj"],
+      "planting_calendar": {
+        "sowing_window": "October - December",
+        "harvest_window": "May - June",
+        "growing_cycle_days": 170,
+        "monthly_calendar": {
+          "Jan": "tillering", "Feb": "tillering", "Mar": "stem elongation",
+          "Apr": "heading", "May": "grain filling + early harvest", "Jun": "main harvest",
+          "Jul": "post-harvest", "Aug": "fallow", "Sep": "soil preparation",
+          "Oct": "sowing main", "Nov": "emergence + tillering", "Dec": "tillering"
+        }
+      },
+      "water_requirements": {
+        "total_mm_per_cycle": "300-450",
+        "regime": "rainfed",
+        "critical_stages": ["tillering", "heading"],
+        "drought_tolerance": "high",
+        "irrigation_advice_fr": "Plus tolérant que le blé. Cultivable en zones avec 250-300 mm de pluie.",
+        "irrigation_advice_ar": "أكثر تحملا للجفاف من القمح. تُزرع في مناطق 250-300 مم."
+      },
+      "average_yield": {
+        "rainfed_q_per_ha": "10-15",
+        "irrigated_q_per_ha": "30-40",
+        "national_average_q_per_ha": 13,
+        "unit": "quintals_per_hectare"
+      },
+      "common_diseases": [
+        { "id": "net_blotch", "name_fr": "Helminthosporiose réticulée", "name_ar": "التبقع الشبكي", "severity": "high", "season": "spring" },
+        { "id": "barley_scald", "name_fr": "Rhynchosporiose", "name_ar": "الرينكوسبوريوم", "severity": "medium", "season": "cool_wet" },
+        { "id": "barley_yellow_dwarf", "name_fr": "Jaunisse nanisante (BYDV)", "name_ar": "فيروس الاصفرار", "severity": "medium", "season": "autumn_spring" },
+        { "id": "powdery_mildew", "name_fr": "Oïdium", "name_ar": "البياض الدقيقي", "severity": "medium", "season": "spring" },
+        { "id": "loose_smut", "name_fr": "Charbon nu", "name_ar": "التفحم السائب", "severity": "medium", "season": "flowering" }
+      ],
+      "soil": { "ph_range": "6.0-8.0", "texture": "tolerates_poor_soils" },
+      "fertilization_npk_kg_per_ha": { "N": 70, "P": 50, "K": 30 }
+    }
+  }
+}

@@ -1,0 +1,27 @@
+# --- Web framework ---
+fastapi==0.115.0
+uvicorn[standard]==0.32.0
+
+# --- Data validation / config ---
+pydantic==2.9.2
+pydantic-settings==2.6.0
+
+# --- LangChain ecosystem (RAG plumbing) ---
+langchain==0.3.7
+langchain-community==0.3.5
+langchain-text-splitters==0.3.2
+
+# --- Embedding model (multilingual, runs on CPU) ---
+sentence-transformers==3.2.1
+
+# --- Vector store (local, file-based) ---
+chromadb==0.5.15
+
+# --- LLM API (Google Gemini — generous free tier) ---
+google-generativeai==0.8.3
+
+# --- HTTP client (for image fetch in vision module later) ---
+httpx==0.27.2
+
+# --- Utilities ---
+python-dotenv==1.0.1
