@@ -1,6 +1,6 @@
 # FIRMA AI  Multilingual RAG Service
 
-The AI core for the NABTA agronomic assistant.
+The AI core for the FIRMA agronomic assistant.
 
 
 ---
@@ -8,7 +8,7 @@ The AI core for the NABTA agronomic assistant.
 ## What's inside
 
 ```
-nabta-ai/
+FIRMA-ai/
 ├── README.md                       
 ├── requirements.txt
 ├── .env.example
