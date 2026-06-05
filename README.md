@@ -1,4 +1,4 @@
-# NABTA AI  Multilingual RAG Service
+# FIRMA AI  Multilingual RAG Service
 
 The AI core for the NABTA agronomic assistant.
 
